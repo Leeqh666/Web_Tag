@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]><html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]><html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]><html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js" > <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Team design card flipper using bootstrap 4 - Bootsnipp.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" th:href="@{/bootstrap-4.0.0-dist/css/bootstrap.css}" rel="stylesheet" >
+    <link rel="stylesheet" href="../static/css/shop.css" th:href="@{/css/shop.css}"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" th:src="@{/bootstrap-4.0.0-dist/js/bootstrap.js}"></script>
+</head>
+<body>
+<!-- Team -->
+<!--/*@thymesVar id="shopList" type="java.util.List<com.example.webtag.domain.Shop>"*/-->
+<!--/*@thymesVar id="shop" type="com.example.webtag.domain.Shop"*/-->
+<section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h1">商店列表</h5>
+        <div class="row">
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4" th:each="shop : ${shopList}">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" th:src = "${shop.image}" alt="card image"></p>
+
+                                    <h4 class="card-title" th:text = "${shop.shopname}">店铺</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <p class="card-text" th:text="${shop.description}">This is basic card with image on top, title, description and button.</p>
+                                    <a href="#" th:href="${shop.url}" class="btn btn-primary btn-sm" ><i class="fa fa-plus" >进入店铺</i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Team member -->
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="button" id="last" tabindex="4" class="btn btn-primary " style="float: left">last</button>
+        <button type="button" id="next" tabindex="4" class="btn btn-primary " style="float: right">next</button>
+    </div>
+</section>
+
+<!-- Team -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var nowNum = /*[[${nowNum}]]*/ 5;
+    var maxNum = /*[[${maxNum}]]*/ 5;
+    var nextUrl = "/home?pageNum="+(nowNum+1);
+    var lastUrl = "/home?pageNum="+(nowNum-1);
+    if(nowNum == 1){
+        document.getElementById("last").style.display="none";
+    }else if(nowNum == maxNum){
+        document.getElementById("next").style.display="none";
+    }
+    $(function () {
+        $("#last").click(function (e) {
+            window.location.href = lastUrl;
+        });
+        $("#next").click(function (e) {
+            window.location.href = nextUrl;
+        });
+    })
+    /*]]>*/
+//No Js required
+</script>
+</body>
+</html>

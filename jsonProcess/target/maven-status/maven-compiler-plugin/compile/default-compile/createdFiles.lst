@@ -1,0 +1,6 @@
+entity/ExtInfo.class
+entity/ReviewPic.class
+entity/Expense.class
+entity/Score.class
+entity/Review.class
+utils/MyJsonProcess.class
